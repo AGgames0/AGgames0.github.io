@@ -3,7 +3,7 @@ OldWord = "" //Tracks old words to stop repeating already selected words
 let Running
 let Music = ["Rock", "Pop", "Jazz", "Sing", "Band"]
 let Travel = ["Bus", "Plane", "Car", "Map", "Compass"]
-let Sport = ["Test"]
+let Sport = ["Tes"]
 let Food = []
 let Animals = []
 let Random = []

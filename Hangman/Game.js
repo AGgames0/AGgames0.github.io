@@ -19,6 +19,10 @@ let highscore = 0 // Counts the score the user has, or the amount of times the u
 let leaderboards = JSON.parse(localStorage.getItem("Leaders")) || []; //Pulls the current leaderboard from a file stored in the pc
 let OldArray = [] // Defines OldArray to be used in functions later
 
+let Alphabet = ["A", "B", "C","D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        for(let i = 0; i < Alphabet.length; i++) {
+            document.getElementById('keyboard').innerHTML += '<button' + ' class=button' + Alphabet[i] + ' id="button" onclick="TestLetter(innerHTML)" >' + Alphabet[i] + '</button>'
+        }
 
 function SelectWord() {
     Catagory = document.getElementById("words").value
@@ -89,6 +93,11 @@ function UpdateTable() {
 
 UpdateTable()
 function SetUp() {
+let Alphabet = ["A", "B", "C","D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+for(let i = 0; i < Alphabet.length; i++) {
+    document.getElementById('keyboard').innerHTML += '<button' + ' class=button' + Alphabet[i] + ' id="button" onclick="TestLetter(innerHTML)" >' + Alphabet[i] + '</button>'
+}
+document.getElementById("Image").src = "images/Hangman.png"
 PastLetters = []
 document.getElementById("keyboard").style.visibility = "visible"
 for(let KBS = 0; KBS < Alphabet.length; KBS++) {

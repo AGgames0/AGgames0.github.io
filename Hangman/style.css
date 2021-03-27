@@ -2,6 +2,7 @@
     font-size: 30px;
     text-align: center;
     font-family: 'Merriweather', serif;
+    margin: 2px;
 }
 
 #button {  
@@ -44,17 +45,16 @@
 
 
 .hangman {
+    display: block;
     width: 25%;
     border-style: solid;
     padding: 12px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
-
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.aaa {
     text-align: center;
 }
 

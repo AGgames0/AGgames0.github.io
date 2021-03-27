@@ -12,6 +12,7 @@
     display: inline-block;
     font-size: 35px;
     outline: none;
+    margin: 2px;
 }
 
 
@@ -43,7 +44,9 @@
 
 
 .hangman {
-    width: 25%; 
+    width: 25%;
+    border-style: solid;
+    padding: 12px;
 }
 
 

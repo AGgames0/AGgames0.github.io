@@ -1,14 +1,14 @@
 // Sets up vars for use later
 OldWord = "" //Tracks old words to stop repeating already selected words
 let Running
-let Music = ["Rock", "Pop", "Jazz", "Sing", "Band"]
+let Music = ["Rock", "Piano", "Jazz", "Sing", "Band", "Flute", "Trumpet", "Beat", "Music Sheet", ]
 let Travel = ["Bus", "Plane", "Car", "Map", "Compass"]
 let Sport = ["Tennis", "Soccer", "Swimming", "Running", "Netball", "Basketball", "Golf", "Cricket", ""]
 let Food = ["Apple"]
 let Animals = ["Bird"]
 let Random = []
 let Revealword = []; //Tracks changes made to the underscores
-let lives = 6; //Tracks the amount of lives the user has left
+let lives = 10; //Tracks the amount of lives the user has left
 let damage = "" // Defines dummy varible to be used for animation later
 let PastLetters = [] // Defines an array to be added to when a user clicks a letter, to prevent them from clicking it again
 let username = window.prompt("Enter your username") // Asks the user to enter a username (Fix later)
@@ -96,7 +96,7 @@ for(let KBS = 0; KBS < Alphabet.length; KBS++) {
 }
 SelectWord();
 Revealword = [];
-lives = 6;
+lives = 10;
 DisplayWord = ""
 let damage = ""
 for (underscores = 0; underscores < word.length; underscores++) {
@@ -110,12 +110,12 @@ for (underscores = 0; underscores < word.length; underscores++) {
 DisplayWord = Revealword.join("");
 document.getElementById('Letters').innerHTML = DisplayWord;
 }
-document.getElementById('LifeCounter').innerHTML = "&#128154;" + " " + lives + "/6";
+document.getElementById('LifeCounter').innerHTML = "&#128154;" + " " + lives + "/10";
 }
 
 
 function TestLetter(SelectedLetter) {
-    if(PastLetters.includes(SelectedLetter) !== true) {
+    if(PastLetters.includes(SelectedLetter) == false) {
     PastLetters.push(SelectedLetter)
     clearTimeout(damage);
     if(lives > 0) {
@@ -137,14 +137,15 @@ function TestLetter(SelectedLetter) {
             }
         } else {
             lives = lives - 1;
-            document.getElementById('LifeCounter').innerHTML = "&#128148;" + " " + lives + "/6";
+            document.getElementById("Image").src = "images/Hangman" + lives + ".png";
+            document.getElementById('LifeCounter').innerHTML = "&#128148;" + " " + lives + "/10";
             damage = setTimeout(function() {
                 if(lives > 4) {
-                    document.getElementById('LifeCounter').innerHTML = "&#128154;" + " " + lives + "/6"} else 
+                    document.getElementById('LifeCounter').innerHTML = "&#128154;" + " " + lives + "/10"} else 
                 if(lives > 2) {
-                    document.getElementById('LifeCounter').innerHTML = "&#128155;" + " " + lives + "/6" } else
+                    document.getElementById('LifeCounter').innerHTML = "&#128155;" + " " + lives + "/10" } else
                 if(lives > 0) {
-                    document.getElementById('LifeCounter').innerHTML = "&#10084;&#65039;" + " " + lives + "/6" }}, 500);}
+                    document.getElementById('LifeCounter').innerHTML = "&#10084;&#65039;" + " " + lives + "/10" }}, 500);}
     };
     if(lives <= 0) {
         document.getElementById("keyboard").style.visibility = "hidden"

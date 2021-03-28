@@ -9,9 +9,9 @@
     background-color: #4ca0af; /* Blue */
     border: none;
     color: white;
-    padding: 1vw 1vw;
+    padding: 0.9vw 0.9vw;
     display: inline-block;
-    font-size: 2.5vw;
+    font-size: 2.4vw;
     outline: none;
     margin: 2px;
 }
@@ -49,7 +49,7 @@
 
 .hangman {
     display: block;
-    width: 35em;
+    width: 20vw;
     border-style: solid;
     padding: 12px;
     margin-left: auto;

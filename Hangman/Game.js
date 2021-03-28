@@ -10,7 +10,6 @@ let Random = ["Music", "Travel", "Sport", "Food", "Animals"]
 let Revealword = []; //Tracks changes made to the underscores
 let lives = 10; //Tracks the amount of lives the user has left
 let damage = "" // Defines dummy varible to be used for animation later
-let PastLetters = [] // Defines an array to be added to when a user clicks a letter, to prevent them from clicking it again
 let username = window.prompt("Enter your username") // Asks the user to enter a username (Fix later)
 if(username === "") {
     username = "NULL" //If the user does not enter a username, set the username to NULL
@@ -136,7 +135,6 @@ for(let i = 0; i < Alphabet.length; i++) {
     document.getElementById('keyboard').innerHTML += '<button' + ' class=button' + Alphabet[i] + ' id="button" onclick="TestLetter(innerHTML)" >' + Alphabet[i] + '</button>'
 }
 document.getElementById("Image").src = "images/Hangman.png"
-PastLetters = []
 
 SelectWord();
 
@@ -160,11 +158,9 @@ document.getElementById('LifeCounter').innerHTML = "&#128154;" + " " + lives + "
 
 
 function TestLetter(SelectedLetter) {
-    if(PastLetters.includes(SelectedLetter) == false) {
-    PastLetters.push(SelectedLetter)
     clearTimeout(damage);
     if(lives > 0) {
-
+        document.querySelector("button.button" + SelectedLetter).disabled = true;
         document.querySelector("button.button" + SelectedLetter).style.opacity = "0.3";
         if(word.toUpperCase().includes(SelectedLetter)) {
             for(GuessI = 0; GuessI < word.length; GuessI++) {
@@ -219,5 +215,4 @@ function TestLetter(SelectedLetter) {
         document.getElementById("DisplayCategory").style.visibility = "hidden"
         document.getElementById("LifeCounter").innerHTML = "<button class=button center id=ReplayButton onclick=Continue()>CONTINUE</button>" 
     };
-}
 };

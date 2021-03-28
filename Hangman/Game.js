@@ -185,9 +185,9 @@ function TestLetter(SelectedLetter) {
             document.getElementById("Image").src = "images/Hangman" + lives + ".png";
             document.getElementById('LifeCounter').innerHTML = "&#128148;" + " " + lives + "/10";
             damage = setTimeout(function() {
-                if(lives > 4) {
+                if(lives > 6) {
                     document.getElementById('LifeCounter').innerHTML = "&#128154;" + " " + lives + "/10"} else 
-                if(lives > 2) {
+                if(lives > 3) {
                     document.getElementById('LifeCounter').innerHTML = "&#128155;" + " " + lives + "/10" } else
                 if(lives > 0) {
                     document.getElementById('LifeCounter').innerHTML = "&#10084;&#65039;" + " " + lives + "/10" }}, 500);}

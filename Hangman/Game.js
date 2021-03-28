@@ -1,11 +1,11 @@
 // Sets up vars for use later
 OldWord = "" //Tracks old words to stop repeating already selected words
 let Running
-let Music = ["Rock", "Piano", "Jazz", "Sing", "Band", "Flute", "Trumpet", "Beat", "Music Sheet", "Microphone", "" ]
-let Travel = ["Bus", "Plane", "Car", "Map", "Compass"]
-let Sport = ["Tennis", "Soccer", "Swimming", "Running", "Netball", "Basketball", "Golf", "Cricket"]
-let Food = ["Apple"]
-let Animals = ["Bird"]
+let Music = ["Rock", "Piano", "Jazz", "Sing", "Band", "Flute", "Trumpet", "Beat", "Music Sheet", "Microphone", "Quarter tone", "Bar", "Clef", "Drum", "Song", "Guitar", "Trumbone", "Violin", "Clarinet", "Note"]
+let Travel = ["Bus", "Plane", "Car", "Map", "Compass", "Caravan", "Backpack", "Trailer", "Truck", "Boat", "Road", "Train", "Railroad", "Distance", "Destination", "Traffic", "Kilometers", "Meters", "Speedometer", "Arrival"]
+let Sport = ["Tennis", "Soccer", "Swimming", "Running", "Netball", "Basketball", "Golf", "Cricket", "Cycling", "Fishing", "Sky Diving", "Bowling", "Archery", "Score", "Team", "Goal", "Spectator", "Athletics", "Snowboarding", "Volleyball"]
+let Food = ["Apple", "Bacon", "Chicken", "Cheese", "Chocolate", "Burger", "Hash Browns", "Carrot", "Strawberry", "Grapes", "Oranges", "Vegetable", "Tomatoes", "Salmon", "Bread", "Fruit", "Pork", "Steak", "Sandwich", "Salad"]
+let Animals = ["Bird", "Whale", "Tiger", "Lion", "Jellyfish", "Elephant", "Platypus", "Fish", "Lizard", "Spider", "Snake", "Cheetah", "Emu", "Kangaroo", "Koala", "Eel", "Sheep", "Shark", "Dolphin", "Sea lion"]
 let Random = ["Music", "Travel", "Sport", "Food", "Animals"]
 let Revealword = []; //Tracks changes made to the underscores
 let lives = 10; //Tracks the amount of lives the user has left

@@ -18,20 +18,20 @@ if(username === "") {
 let highscore = 0 // Counts the score the user has, or the amount of times the user has guessed a word correctly
 let leaderboards = JSON.parse(localStorage.getItem("Leaders")) || []; //Pulls the current leaderboard from a file stored in the pc
 let OldArray = [] // Defines OldArray to be used in functions later
-let Catagory
+let Category
 
 function SelectWord() {
-    Catagory = document.getElementById("words").value
-    if(Catagory == "Random") {
-        Catagory = Random[Math.floor(Math.random() * Random.length)]
-        console.log(Catagory)
-        document.getElementById("DisplayCatagory").innerHTML = "Random - " + Catagory
+    Category = document.getElementById("words").value
+    if(Category == "Random") {
+        Category = Random[Math.floor(Math.random() * Random.length)]
+        console.log(Category)
+        document.getElementById("DisplayCategory").innerHTML = "Random - " + Category
     } else {
-        document.getElementById("DisplayCatagory").innerHTML = document.getElementById("words").value
+        document.getElementById("DisplayCategory").innerHTML = document.getElementById("words").value
     }
     document.getElementById("Dropdown").style.visibility = "hidden"
-    document.getElementById("DisplayCatagory").style.visibility = "visible"
-    switch(Catagory) {
+    document.getElementById("DisplayCategory").style.visibility = "visible"
+    switch(Category) {
         case "Music":
             if(Running != 1) {
             word = Music[Math.floor(Math.random() * Music.length)]
@@ -201,7 +201,7 @@ function TestLetter(SelectedLetter) {
         }
         Running = 0
         document.getElementById("Dropdown").style.visibility = "visible"
-        document.getElementById("DisplayCatagory").style.visibility = "hidden"
+        document.getElementById("DisplayCategory").style.visibility = "hidden"
         document.getElementById("LifeCounter").innerHTML = "<button class=button id=ReplayButton onclick=SetUp()>TRY AGAIN</button>" 
     };
     if(DisplayWord.indexOf("_") == -1) {
@@ -216,7 +216,7 @@ function TestLetter(SelectedLetter) {
         UpdateScore(PushScore)
         Running = 0
         document.getElementById("Dropdown").style.visibility = "visible"
-        document.getElementById("DisplayCatagory").style.visibility = "hidden"
+        document.getElementById("DisplayCategory").style.visibility = "hidden"
         document.getElementById("LifeCounter").innerHTML = "<button class=button center id=ReplayButton onclick=Continue()>CONTINUE</button>" 
     };
 }

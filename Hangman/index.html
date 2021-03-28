@@ -12,7 +12,8 @@
     <div style="border-top: solid; border-bottom: solid; margin: 0%;">
         <h1 class="TitleBar">Hangman</h1>
     </div>
-    <label class="centerLabel FontSize" for="words">Chose: <select oninput="SelectWord(getElementById('words').value)" id="words" name="words" id="Dropdown" onload="SelectWord()">
+    <p id="DisplayCatagory" class="center FontSize"></p>
+    <label id="Dropdown" class="centerLabel FontSize" for="words">Chose: <select oninput="SetUp()" id="words" name="words" id="DropdownBox" onload="SelectWord()">
         <option value="Music">Music</option>
         <option value="Travel">Travel</option>
         <option value="Sport">Sport</option>
@@ -21,15 +22,12 @@
         <option value="Random">Random</option>
     </select></label>
     <link rel="stylesheet" href="style.css">
-        <div class="aaa">
-            <span style="vertical-align: middle" class="center FontSize" id="LifeCounter">&#128154;: 6/6</span>
-            <img style="vertical-align: middle;" id="Image" class="hangman" src="images/Hangman.png" alt="a" srcset="">
-            <span style="vertical-align: middle;" class="center FontSize" id="score">&#128293; 0</span>
-        </div>
+                <p class="center FontSize" id="LifeCounter">&#128154;: 10/10</p>
+                <img  id="Image" class="hangman" src="images/Hangman.png" alt="a" srcset="">
+                <p class="center FontSize" id="score">&#128293; 0</p>
     </div>
     <div id="Letters">if you see this things broke</div>
-    <div id="keyboard" style="text-align: center;">
-    </div>
+    <div id="keyboard" style="text-align: center;"></div>
     <table id="LeaderboardPlayers" class="center">
         <caption>LEADERBOARD</caption>
         <thead><tr>

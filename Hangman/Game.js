@@ -1,12 +1,12 @@
 // Sets up vars for use later
 OldWord = "" //Tracks old words to stop repeating already selected words
 let Running
-let Music = ["Rock", "Piano", "Jazz", "Sing", "Band", "Flute", "Trumpet", "Beat", "Music Sheet", ]
+let Music = ["Rock", "Piano", "Jazz", "Sing", "Band", "Flute", "Trumpet", "Beat", "Music Sheet", "Microphone", "" ]
 let Travel = ["Bus", "Plane", "Car", "Map", "Compass"]
-let Sport = ["Tennis", "Soccer", "Swimming", "Running", "Netball", "Basketball", "Golf", "Cricket", ""]
+let Sport = ["Tennis", "Soccer", "Swimming", "Running", "Netball", "Basketball", "Golf", "Cricket"]
 let Food = ["Apple"]
 let Animals = ["Bird"]
-let Random = []
+let Random = ["Music", "Travel", "Sport", "Food", "Animals"]
 let Revealword = []; //Tracks changes made to the underscores
 let lives = 10; //Tracks the amount of lives the user has left
 let damage = "" // Defines dummy varible to be used for animation later
@@ -18,14 +18,19 @@ if(username === "") {
 let highscore = 0 // Counts the score the user has, or the amount of times the user has guessed a word correctly
 let leaderboards = JSON.parse(localStorage.getItem("Leaders")) || []; //Pulls the current leaderboard from a file stored in the pc
 let OldArray = [] // Defines OldArray to be used in functions later
-
-let Alphabet = ["A", "B", "C","D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-        for(let i = 0; i < Alphabet.length; i++) {
-            document.getElementById('keyboard').innerHTML += '<button' + ' class=button' + Alphabet[i] + ' id="button" onclick="TestLetter(innerHTML)" >' + Alphabet[i] + '</button>'
-        }
+let Catagory
 
 function SelectWord() {
     Catagory = document.getElementById("words").value
+    if(Catagory == "Random") {
+        Catagory = Random[Math.floor(Math.random() * Random.length)]
+        console.log(Catagory)
+        document.getElementById("DisplayCatagory").innerHTML = "Random - " + Catagory
+    } else {
+        document.getElementById("DisplayCatagory").innerHTML = document.getElementById("words").value
+    }
+    document.getElementById("Dropdown").style.visibility = "hidden"
+    document.getElementById("DisplayCatagory").style.visibility = "visible"
     switch(Catagory) {
         case "Music":
             if(Running != 1) {
@@ -48,6 +53,39 @@ function SelectWord() {
                 Running = 1
             }
         }
+
+        case "Sport":
+            if(Running != 1) {
+                word = Sport[Math.floor(Math.random() * Sport.length)]
+                if(word === OldWord) {
+                    SelectWord()
+                }   else {
+                    OldWord = word
+                    Running = 1
+                }
+            }
+            
+        case "Food":
+            if(Running != 1) {
+                word = Food[Math.floor(Math.random() * Food.length)]
+                if(word === OldWord) {
+                    SelectWord()
+                }   else {
+                    OldWord = word
+                    Running = 1
+                }
+            }
+
+        case "Animals":
+            if(Running != 1) {
+                word = Animals[Math.floor(Math.random() * Animals.length)]
+                if(word === OldWord) {
+                    SelectWord()
+                }   else {
+                    OldWord = word
+                    Running = 1
+                }
+            }
     }
     console.log()
     return word
@@ -99,11 +137,9 @@ for(let i = 0; i < Alphabet.length; i++) {
 }
 document.getElementById("Image").src = "images/Hangman.png"
 PastLetters = []
-document.getElementById("keyboard").style.visibility = "visible"
-for(let KBS = 0; KBS < Alphabet.length; KBS++) {
-    document.querySelector("button.button" + Alphabet[KBS]).style.opacity = "1";
-}
+
 SelectWord();
+
 Revealword = [];
 lives = 10;
 DisplayWord = ""
@@ -157,18 +193,19 @@ function TestLetter(SelectedLetter) {
                     document.getElementById('LifeCounter').innerHTML = "&#10084;&#65039;" + " " + lives + "/10" }}, 500);}
     };
     if(lives <= 0) {
-        document.getElementById("keyboard").style.visibility = "hidden"
+        document.getElementById("keyboard").innerHTML = ""
         document.getElementById('Letters').innerHTML = word;
         highscore = 0
-        console.log("lose")
         if(highscore > 0) {
             UpdateScore()
         }
         Running = 0
+        document.getElementById("Dropdown").style.visibility = "visible"
+        document.getElementById("DisplayCatagory").style.visibility = "hidden"
         document.getElementById("LifeCounter").innerHTML = "<button class=button id=ReplayButton onclick=SetUp()>TRY AGAIN</button>" 
     };
     if(DisplayWord.indexOf("_") == -1) {
-        document.getElementById("keyboard").style.visibility = "hidden";
+        document.getElementById("keyboard").innerHTML = ""
         highscore += 1
         document.getElementById('score').innerHTML = "&#128293; " + highscore
         PushScore = {
@@ -178,6 +215,8 @@ function TestLetter(SelectedLetter) {
         OldArray = Array.from(leaderboards)
         UpdateScore(PushScore)
         Running = 0
+        document.getElementById("Dropdown").style.visibility = "visible"
+        document.getElementById("DisplayCatagory").style.visibility = "hidden"
         document.getElementById("LifeCounter").innerHTML = "<button class=button center id=ReplayButton onclick=Continue()>CONTINUE</button>" 
     };
 }

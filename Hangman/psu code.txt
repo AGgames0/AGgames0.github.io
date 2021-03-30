@@ -1,0 +1,241 @@
+DECLARE VARIABLE OldWord
+DECLARE VARIABLE Running
+DECLARE ARRAY Music WITH Rock, Piano, Jazz, Sing, Band, Flut", Trumpet, Beat, Music Sheet, Microphone, Quarter tone, Bar, Clef, Drum, Song, Guitar, Trombone, Violin, Clarinet, Note
+
+DECLARE ARRAY Travel WITH Bus, Plane, Car, Map, Compass, Caravan, Backpack, Trailer, Truck, Boat, Road, Train, Railroad, Distance, Destination, Traffic, Kilometers, Meters, Speedometer, Arrival
+
+DECLARE ARRAY Sport WITH Tennis, Soccer, Swimming, Running, Netball, Basketball, Golf, Cricket, Cycling, Fishing, Sky Diving, Bowling, Archery, Score, Team, Goal, Spectator, Athletics, Snowboarding, Volleyball
+
+DECLARE ARRAY Food WITH Apple, Bacon, Chicken, Cheese, Chocolate, Burger, Hash Browns, Carrot, Strawberry, Grapes, Oranges, Vegetable, Tomatoes, Salmon, Bread, Fruit, Pork, Steak, Sandwich, Salad
+
+DECLARE ARRAY Animals WITH Bird, Whale, Tiger, Lion, Jellyfish, Elephant, Platypus, Fish, Lizard, Spider, Snake, Cheetah, Emu, Kangaroo, Koala, Eel, Sheep, Shark, Dolphin, Sea lion
+
+DECLARE ARRAY Random WITH Music, Travel, Sport, Food, Animals
+
+DECLARE ARRAY Revealword
+DECLARE VARIABLE lives at 10
+DECLARE damage
+DECLARE username
+SET username to INPUT
+IF username IS EQUAL TO nothing THEN
+    SET username to NULL
+ENDIF
+
+DECLARE highscore at 0
+DECLARE leaderboards 
+IF local leaderboard file EXISTS THEN
+    SET leaderboards to leaderboard file 
+    ELSE 
+        SET leaderboards to blank ARRAY
+ENDIF 
+DECLARE OldArray
+DECLARE Category
+
+DECLARE FUNCTION SelectWord
+   DECLARE Category
+   SET Category to the user selected Category
+    IF Category IS EQUAL TO Random THEN
+        SET Category to random STRING from the Random ARRAY
+        ADD "Random - " AND VARIABLE Category to the end of HTML ELEMENT matching the ID of DisplayCategory
+        ELSE
+            UPDATE Category label to selected Category
+        ENDIF
+    SET visibility of HTML ELEMENT matching the id of Dropdown to hidden
+    SET visibility of HTML ELEMENT matching the id of DisplayCategory to visible
+    DECLARE CASE STATEMENT WITH VARIABLE Category
+        DECLARE CASE Category is EQUAL TO STRING Music
+            IF Running IS NOT EQUAL TO 1 THEN
+                DECLARE AND SET word to RANDOM from ARRAY Music
+                IF word is EQUAL TO OldWord THEN
+                    CALL SelectWord
+                ELSE
+                   SET OldWord to word
+                   SET Running to 1
+                ENDIF
+            ENDIF
+        DECLARE CASE BREAK
+
+        DECLARE CASE Category is EQUAL TO STRING Travel
+            IF Running IS NOT EQUAL TO 1 THEN
+                SET word to RANDOM STRING from ARRAY Travel
+                IF word is EQUAL TO OldWord THEN
+                    CAll SelectWord
+                ELSE 
+                   SET OldWord to word
+                   SET Running to 1
+                ENDIF
+            ENDIF
+        DECLARE CASE BREAK
+
+        DECLARE CASE Category is EQUAL TO STRING Sport
+            IF Running IS NOT EQUAL TO 1 THEN
+                SET word to RANDOM STRING FROM ARRAY Sport
+                IF word is EQUAL TO OldWord
+                    CALL SelectWord THEN
+                ELSE
+                   SET OldWord to word
+                   SET Running to 1
+                ENDIF
+            ENDIF
+            
+        DECLARE CASE Category is EQUAL TO STRING Food
+            IF Running IS NOT EQUAL TO 1 THEN
+                SET word to RANDOM STRING from ARRAY Food
+                IF word is EQUAL TO OldWord THEN
+                    CALL SelectWord
+                ELSE
+                   SET OldWord to word
+                   SET Running to 1
+                ENDIF
+            ENDIF
+
+        DECLARE CASE Category is EQUAL TO STRING Animals
+            IF Running IS NOT EQUAL TO 1 THEN
+                SET word to RANDOM STRING from ARRAY Animals
+                IF word is EQUAL TO OldWord THEN
+                   CALL SelectWord
+                ELSE
+                   SET OldWord to word
+                   SET Running to 1
+                ENDIF
+            ENDIF
+    END SWITCH CASE
+    RETURN word
+ENDFUNCTION
+
+
+DECLARE FUNCTION Continue
+    SET leaderboards to OldArray
+    CALL SetUp
+ENDFUNCTION
+
+DECLARE FUNCTION UpdateScore using VARIABLE Placing
+    ADD VARIABLE Placing to end of ARRAY leaderboards
+    SORT ARRAY leaderboards by highest to lowest
+    REMOVE everything after the 5 placing in ARRAY leaderboards
+    ADD LOCALSTORAGE to pc from ARRAY leaderboards
+    CALL UpdateTable
+ENDFUNCTION
+
+DECLARE FUNCTION UpdateTable
+    CLEAR leaderboard displayed in HTML website
+    CREATE new Table Body and ASSIGN it to x
+    SET ID of Table Body in x to myTb
+    DISPLAY x in HTML Table
+    SET i to 0
+    FOR THE LENGTH OF leaderboards is GREATER THAN i ADD 1 to i EACH LOOP
+        
+        SET y to CREATE_HTML_ELEMENT TABLE ROW
+        SET ID of HTML ELEMENT in VARIABLE y to myTr PLUS VARIABLE i
+        ADD VARIABLE y to HTML ELEMENT with the id of myTB
+
+        SET z to CREATE_HTML_ELEMENT TABLE DATA
+        SET t to CREATE_HTML_TEXT leaderboards INDEX OF variable I AND DATA OF STRING username
+        ADD VARIABLE t to VARIABLE z
+        ADD VARIABLE z to HTML ELEMENT with the id mrTr PLUS i
+
+        SET z to CREATE_HTML_ELEMENT TABLE DATA document.createElement("TD");
+        SET t to CREATE_HTML_TEXT leaderboards INDEX OF variable I AND DATA OF STRING username
+        ADD t to z
+        ADD z to HTML ELEMENT with the ID mrTr PLUS i
+    ENDFOR
+ENDFUNCTION
+
+CALL UpdateTable
+DECLARE FUNCTION SetUp
+    DECLARE ARRAY Alphabet WITH A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+    SET i to 0 FOR LENGTH of Alphabet IS GREATER THAN i ADD 1 to i EACH LOOP
+        SET x to CREATE_HTML_ELEMENT BUTTON
+        SET VARIABLE x ID to button
+        SET VARIABLE x CLASS to button PLUS Alphabet with the INDEX of i
+        SET VARIABLE x ONCLICK to CALL TestLetter with the VARIABLE of innerHTML
+        SET t to CREATE_HTML_TEXT Alphabet with the INDEX of i
+        ADD VARIABLE t to VARIABLE x
+        ADD VARIABLE x to HTML ELEMENT with the ID of keyboard
+    ENDFOR
+
+    SET source of HTML IMAGE with id of Image to images/Hangman.png
+
+    CALL SelectWord
+
+    DECLARE ARRAY Revealword
+    DECLARE lives at 10
+    DECLARE VARIABLE DisplayWord as ""
+    DECLARE VARIABLE damage as ""
+    SET underscores to 0 FOR LENGTH of WORD IS GREATER THAN underscores ADD 1 to underscores EACH LOOP
+        IF word with the INDEX of underscores is EQUAL TO SPACEBAR THEN
+            ADD Non-Breaking-Space to ARRAY Revealword
+            ADD Non-Breaking-Space to ARRAY Revealword
+            ADD Non-Breaking-Space to ARRAY Revealword 
+        ELSEIF word WITH the INDEX of underscores + 1 is EQUAL to SPACEBAR
+        ADD _ to ARRAY Revealword
+        ENDIF ELSE
+            ADD "_ " to ARRAY Revealword
+        ENDIF
+    ENDFOR
+    JOIN Revealword to STRING
+    SET DisplayWord to Revealword
+    DISPLAY DisplayWord to HTML
+    DISPLAY a green heart and life counter out of 10 to HTML
+ENDFUNCTION
+
+
+DECLARE FUNCTION TestLetter WITH the VARIABLE of SelectedLetter
+    CLEAR TIMER from VARIABLE damage
+    IF lives IS GREATER THAN 0 THEN
+        DISABLE HTML BUTTON with the class of "button.button" PLUS SelectedLetter
+        SET OPACITY of HTML BUTTON with the class of "button.button" PLUS SelectedLetter to "0.3"
+        IF  word converted to UPPERCASE includes SelectedLetter THEN
+            SET GuesI to 0 FOR LENGTH of WORD IS GREATER than GuessI ADD 1 to GuessI EACH LOOP
+                IF UPPERCASE word with the INDEX of GuessI is EQUAL to SelectedLetter THEN
+                    IF SelectedLetter is EQUAL to word with the INDEX of VARIABLE GuessI THEN
+                    SET Revealword with the INDEX of VARIABLE GuessI to VARIABLE SelectedLetter;
+                    SET DisplayWord to ARRAY Revealword, converted to STRING
+                    DISPLAY DisplayWord to HTML, in place of previous DisplayWord
+                ELSE
+                    SET Revealword with the INDEX of VARIABLE GuessI to SelectedLetter, converted to LOWERCASE
+                    SET DisplayWord to ARRAY Revealword, converted to STRING
+                    DISPLAY DisplayWord to HTML, in place of previous DisplayWord
+                    ENDIF
+                ENDIF
+            ENDFOR
+        ELSE
+            TAKE 1 from VARIABLE lives
+            UPDATE Hangman image
+            DISPLAY red broken heart and current lives out of 10
+            START TIMER with the name damage, EXECUTE a function ever 500ms DECLARE TIMER FUNCTION
+                IF lives is GREATER THAN 6 THEN
+                   DISPLAY green heart and life counter with lives remaining out of 10
+                ELSE
+                IF lives is GREATER THAN 3 THEN
+                    DISPLAY yellow heart and life counter with lives remaining out of 10
+                IF lives is GREATER THAN 0 THEN
+                    DISPLAY red heart and life counter with lives remaining out of 10
+    ENDIF
+    IF lives IS EQUAL TO OR LESS THAN 0 THEN
+        REMOVE on screen keyboard
+        DISPLAY word
+        SET highscore to 0
+        IF highscore is GREATER THAN 0 THEN
+            CALL UpdateScore
+        ENDIF
+        SET Running to 0
+        DISPLAY Category selector
+        REMOVE Category label
+        DISPLAY button with the class button, the ID ReplayButton and make it CALL SetUp when clicked, have it labeled TRY AGAIN, put in place of the life counter
+    ENDIF
+    IF DisplayWord does not INCLUDE an underscores THEN
+        REMOVE on-screen keyboard
+        ADD 1 to highscore
+        DISPLAY highscore
+        ADD username and highscore to ARRAY called PushScore
+        SET OldArray to ARRAY leaderboards
+        CALL UpdateScore with VARIABLE PushScore
+        SET Running to 0
+        DISPLAY Category selector
+        REMOVE Category label
+        DISPLAY button with the class button, the ID ReplayButton and make it CALL SetUp when clicked, have it labeled CONTINUE, put in place of the life counter
+    ENDIF
+ENDFUNCTION
+
+

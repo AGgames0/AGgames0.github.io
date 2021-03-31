@@ -215,10 +215,11 @@ DECLARE FUNCTION TestLetter WITH the VARIABLE of SelectedLetter
     IF lives IS EQUAL TO OR LESS THAN 0 THEN
         REMOVE on screen keyboard
         DISPLAY word
-        SET highscore to 0
         IF highscore is GREATER THAN 0 THEN
             CALL UpdateScore
         ENDIF
+        SET highscore to 0
+        DISPLAY highscore
         SET Running to 0
         DISPLAY Category selector
         REMOVE Category label

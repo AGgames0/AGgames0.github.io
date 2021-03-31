@@ -199,11 +199,12 @@ function TestLetter(SelectedLetter) {//Defines TestLetter function using the var
     if(lives <= 0) {//If the user loses all lives
         document.getElementById("keyboard").innerHTML = "" //Remove the keyboard
         document.getElementById('Letters').innerHTML = word; //Reveal the word to the user, helps with spelling practice
-        highscore = 0 //Clears the score
         if(highscore > 0) { //If the user's score is greater than 0
             UpdateScore() //Update the leaderboard
         }
+        highscore = 0 //Clears the score
         Running = 0 //Set Running to 0
+        document.getElementById('score').innerHTML = "&#128293; " + highscore //Display the user's new score
         document.getElementById("Dropdown").style.visibility = "visible" //Display the category selector to the user
         document.getElementById("DisplayCategory").style.visibility = "hidden" //Remove the Category label
         document.getElementById("LifeCounter").innerHTML = "<button class=button id=ReplayButton onclick=SetUp()>TRY AGAIN</button>" //Replace lives with TRY AGAIN button, with the classes button and center, the ID ReplayButton and the onclick event to call the SetUp function

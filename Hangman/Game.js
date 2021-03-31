@@ -1,4 +1,8 @@
 // Sets up vars for use later
+let username = window.prompt("Enter your username") // Asks the user to enter a username
+if(username === "") {
+    username = "NULL" //If the user does not enter a username, set the username to NULL
+}
 OldWord = "" //Tracks old words to stop repeating already selected words
 let Running // Defines Running, which prevents glitches
 let Music = ["Rock", "Piano", "Jazz", "Sing", "Band", "Flute", "Trumpet", "Beat", "Music Sheet", "Microphone", "Quarter tone", "Bar", "Clef", "Drum", "Song", "Guitar", "Trombone", "Violin", "Clarinet", "Note"] //Defines Music category
@@ -9,11 +13,7 @@ let Animals = ["Bird", "Whale", "Tiger", "Lion", "Jellyfish", "Elephant", "Platy
 let Random = ["Music", "Travel", "Sport", "Food", "Animals"] //Defines Random category, used to pick a random category
 let Revealword = []; //Tracks changes made to the underscores
 let lives = 10; //Tracks the amount of lives the user has left
-let damage = "" // Defines dummy variable\ to be used for animation later
-let username = window.prompt("Enter your username") // Asks the user to enter a username
-if(username === "") {
-    username = "NULL" //If the user does not enter a username, set the username to NULL
-}
+let damage = "" // Defines dummy variable to be used for animation later
 let highscore = 0 // Counts the score the user has, or the amount of times the user has guessed a word correctly
 let leaderboards = JSON.parse(localStorage.getItem("Leaders")) || []; //Pulls the current leaderboard from a file stored in the pc
 let OldArray = [] // Defines OldArray to be used in functions later
@@ -221,6 +221,6 @@ function TestLetter(SelectedLetter) {//Defines TestLetter function using the var
         Running = 0 //Set running to 0
         document.getElementById("Dropdown").style.visibility = "visible" //Display the Category selector 
         document.getElementById("DisplayCategory").style.visibility = "hidden" //Removes the Category label
-        document.getElementById("LifeCounter").innerHTML = "<button class=button center id=ReplayButton onclick=Continue()>CONTINUE</button>" //Replace lives with CONTINUE button, with the classes button and center, the ID ReplayButton and the onclick event to call the Continue function
+        document.getElementById("LifeCounter").innerHTML = "<button class=button center id=ReplayButton onclick=Continue()>YOU WIN! Press to continue</button>" //Replace lives with CONTINUE button, with the classes button and center, the ID ReplayButton and the onclick event to call the Continue function
     };
 };

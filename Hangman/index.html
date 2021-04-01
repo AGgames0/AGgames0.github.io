@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman Game</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+<!DOCTYPE html> <!-- Document Setup -->
+<html lang="en"> <!-- Document Setup -->
+<head> <!-- Document Setup -->
+    <meta charset="UTF-8"> <!-- Document Setup -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Document Setup -->
+    <title>Hangman Game</title> <!-- Titles HTML -->
+    <link rel="stylesheet" href="style.css"> <!-- Grabs stylesheet -->
+    <link rel="preconnect" href="https://fonts.gstatic.com"> <!-- Connects to font server -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet"> <!-- Grabs the Merriweather font -->
 </head>
-<body style="background-color:powderblue">
-    <div style="border-top: solid; border-bottom: solid; margin: 0%;">
+<body style="background-color:powderblue"> <!-- Sets background colour -->
+    <div style="border-top: solid; border-bottom: solid; margin: 0%;"> <!-- Sets up title with borders -->
         <h1 class="TitleBar">Hangman</h1>
     </div>
-    <p id="DisplayCategory" class="center FontSize"></p>
-    <label id="Dropdown" class="centerLabel FontSize" for="words">Choose A Topic: <select oninput="SetUp()" id="words" name="words" id="DropdownBox" onload="SelectWord()">
+    <p id="DisplayCategory" class="center FontSize"></p> <!-- Sets up the place to display the current category -->
+    <label id="Dropdown" class="centerLabel FontSize" for="words">Choose A Topic: <select oninput="SetUp()" id="words" name="words" id="DropdownBox" onload="SelectWord()"> <!-- Sets up the category selector -->
         <option value="Random">Random</option>
         <option value="Music">Music</option>
         <option value="Travel">Travel</option>
@@ -21,21 +21,21 @@
         <option value="Food">Food</option>
         <option value="Animals">Animals</option>
     </select></label>
-    <link rel="stylesheet" href="style.css">
-                <p class="center FontSize" id="LifeCounter">&#128154;: 10/10</p>
-                <img  id="Image" class="hangman" src="images/Hangman.png" alt="a" srcset="">
-                <p class="center FontSize" id="score">&#128293; 0</p>
+    <link rel="stylesheet" href="style.css"> <!-- Sets up style again -->
+                <p class="center FontSize" id="LifeCounter">&#128154;: 10/10</p> <!-- Sets up life counter -->
+                <img  id="Image" class="hangman" src="images/Hangman.png" alt="a" srcset=""> <!-- Sets up image -->
+                <p class="center FontSize" id="score">&#128293; 0</p> <!-- Sets up score counter -->
     </div>
-    <div id="Letters">if you see this things broke</div>
-    <div id="keyboard" style="text-align: center;"></div>
+    <div id="Letters">if you see this things broke</div> <!-- Sets up a place to put the underscores -->
+    <div id="keyboard" style="text-align: center;"></div> <!-- Sets up keyboard -->
     <table id="LeaderboardPlayers" class="center">
-        <caption>LEADERBOARD</caption>
+        <caption>LEADERBOARD</caption> <!-- Sets up leaderboard -->
         <thead><tr>
             <td>Name</td>
             <td>Score</td>
         </tr></thead>
-        <tbody id="myTb"></tbody>
+        <tbody id="myTb"></tbody> <!-- Sets up a place to put the leaders -->
     </table>
-    <script src="Game.js" onload="SetUp()"></script>
+    <script src="Game.js" onload="SetUp()"></script> <!-- Activates Javascript -->
 </body>
 </html>

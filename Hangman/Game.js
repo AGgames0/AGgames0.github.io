@@ -3,6 +3,7 @@ let username = window.prompt("Enter your username") // Asks the user to enter a 
 if(username === "") {
     username = "NULL" //If the user does not enter a username, set the username to NULL
 }
+let win = 0
 OldWord = "" //Tracks old words to stop repeating already selected words
 let Running // Defines Running, which prevents glitches
 let Music = ["Rock", "Piano", "Jazz", "Sing", "Band", "Flute", "Trumpet", "Beat", "Music Sheet", "Microphone", "Quarter tone", "Bar", "Clef", "Drum", "Song", "Guitar", "Trombone", "Violin", "Clarinet", "Note"] //Defines Music category
@@ -98,17 +99,17 @@ function Continue() { // Defines continue function for use when the user wins th
     SetUp() // Starts the game again
 }
 
-function UpdateScore(Placing /*Provides score infomation to allow the leaderboard to be updated*/) { //Defines a function to update the user's score and the leaderboard at the end of each game
+function UpdateScore(Placing /*Provides score information to allow the leaderboard to be updated*/) { //Defines a function to update the user's score and the leaderboard at the end of each game
     leaderboards.push(Placing) //Adds the user and the score to the leaderboard array
     leaderboards.sort((a, b) => b.score - a.score) //Sorts array from highest score to lowest score
     leaderboards.splice(5) //Removes any user that is not in the top 5 scores
-    localStorage.setItem("Leaders", JSON.stringify(leaderboards)) //Creates a JSON file and stores leaderboard infomation, allows leaderboard to persist over multiple app reboots
-    UpdateTable() //Tells the game to change the leaderboard infomation
+    localStorage.setItem("Leaders", JSON.stringify(leaderboards)) //Creates a JSON file and stores leaderboard information, allows leaderboard to persist over multiple app reboots
+    UpdateTable() //Tells the game to change the leaderboard information
 }
 
 function UpdateTable() { //Declares UpdateTable function to update the displayed leaderboard
     document.getElementById("myTb").innerHTML = "" //Clears the currently displayed leaderboard
-    var x = document.createElement("TB"); //Makes a new TableBody, for the leaderboard infomation
+    var x = document.createElement("TB"); //Makes a new TableBody, for the leaderboard information
         x.setAttribute("id", "myTb"); //Sets the id of the new TableBody to "myTb"
         document.getElementById("LeaderboardPlayers").appendChild(x); //Adds the newly created TableBody to the table with the id of "LeaderboardPlayers"
     for(let i = 0; i < leaderboards.length; i++) { //Basic for loop loops through every entry in the leaderboard array
@@ -119,7 +120,7 @@ function UpdateTable() { //Declares UpdateTable function to update the displayed
         document.getElementById("myTb").appendChild(y); //Adds the variable to the previously created TableBody
 
         var z = document.createElement("TD"); //Creates a new variable to create Table Data
-        var t = document.createTextNode(leaderboards[i]["username"]); //Creates a new variable to create text, pulls the text from the leaderboard username, uses i to index and select wich username to display
+        var t = document.createTextNode(leaderboards[i]["username"]); //Creates a new variable to create text, pulls the text from the leaderboard username, uses i to index and select which username to display
         z.appendChild(t); //Adds the newly created text data to the Table Data
         document.getElementById("myTr" + [i]).appendChild(z); //Adds the new Table Data to myTr[1-5], using i it matches username, score and placing to the correct place 
 
@@ -143,6 +144,10 @@ for(let i = 0; i < Alphabet.length; i++) { //Creates a for loop using i to count
   document.getElementById("keyboard").appendChild(x); //Adds the button data stored in x to the on-screen keyboard
 }
 document.getElementById("Image").src = "images/Hangman.png" //Resets the hangman image
+if (win == 1) {//Checks if the user won last game
+    leaderboards = OldArray //Reverts the leaderboard
+    win = 0 //Resets win
+}
 
 SelectWord(); //Selects a new word
 
@@ -175,11 +180,11 @@ function TestLetter(SelectedLetter) {//Defines TestLetter function using the var
                 if(word[GuessI].toUpperCase() == SelectedLetter) { //If the letter selected matches the letter in the word
                     if(SelectedLetter == word[GuessI]) { //If the letter is a capital
                     Revealword[GuessI] = SelectedLetter; //Put the letter the user selected in the place of the array reveal word, due to array indexing this will be the same place the matching letter in word is
-                    DisplayWord = Revealword.join(""); //Coverts Revealword to string and assign the string to Display word, with the new modifications
+                    DisplayWord = Revealword.join(""); //Converts Revealword to string and assign the string to Display word, with the new modifications
                     document.getElementById('Letters').innerHTML = DisplayWord; //Displays DisplayWord to the user
                 } else { //If the correct guess does is not a capital letter
                     Revealword[GuessI] = SelectedLetter.toLowerCase(); //Adds the user selected letter to the correct place matching the loop progress, but this time converts the letter to lowercase
-                    DisplayWord = Revealword.join(""); //Coverts Revealword to string and assigns the string to Display word, with the new modifications
+                    DisplayWord = Revealword.join(""); //Converts Revealword to string and assigns the string to Display word, with the new modifications
                     document.getElementById('Letters').innerHTML = DisplayWord; //Displays DisplayWord to the user
                 };
                 };
@@ -199,10 +204,15 @@ function TestLetter(SelectedLetter) {//Defines TestLetter function using the var
     if(lives <= 0) {//If the user loses all lives
         document.getElementById("keyboard").innerHTML = "" //Remove the keyboard
         document.getElementById('Letters').innerHTML = word; //Reveal the word to the user, helps with spelling practice
+        PushScore = { //Define array with user's username and score
+            username: username,
+            score: highscore
+        }
         if(highscore > 0) { //If the user's score is greater than 0
-            UpdateScore() //Update the leaderboard
+            UpdateScore(PushScore) //Update the leaderboard
         }
         highscore = 0 //Clears the score
+        OldArray = []
         Running = 0 //Set Running to 0
         document.getElementById('score').innerHTML = "&#128293; " + highscore //Display the user's new score
         document.getElementById("Dropdown").style.visibility = "visible" //Display the category selector to the user
@@ -220,7 +230,8 @@ function TestLetter(SelectedLetter) {//Defines TestLetter function using the var
         OldArray = Array.from(leaderboards) //make a backup of the old array
         UpdateScore(PushScore) //Update the leaderboard
         Running = 0 //Set running to 0
-        document.getElementById("Dropdown").style.visibility = "visible" //Display the Category selector 
+        win = 1 //Sets win to 1
+        document.getElementById("Dropdown").style.visibility = "visible" //Display the Category selector
         document.getElementById("DisplayCategory").style.visibility = "hidden" //Removes the Category label
         document.getElementById("LifeCounter").innerHTML = "<button class=button center id=ReplayButton onclick=Continue()>YOU WIN! Press to continue</button>" //Replace lives with CONTINUE button, with the classes button and center, the ID ReplayButton and the onclick event to call the Continue function
     };

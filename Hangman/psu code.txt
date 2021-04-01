@@ -155,6 +155,10 @@ DECLARE FUNCTION SetUp
     ENDFOR
 
     SET source of HTML IMAGE with id of Image to images/Hangman.png
+    IF win is EQUAL TO 1
+    SET leaderboards to OldArray
+    SET win to 0
+}
 
     CALL SelectWord
 
@@ -215,8 +219,9 @@ DECLARE FUNCTION TestLetter WITH the VARIABLE of SelectedLetter
     IF lives IS EQUAL TO OR LESS THAN 0 THEN
         REMOVE on screen keyboard
         DISPLAY word
+        ADD username and highscore to ARRAY called PushScore
         IF highscore is GREATER THAN 0 THEN
-            CALL UpdateScore
+            CALL UpdateScore wtih ARRAY PushScore
         ENDIF
         SET highscore to 0
         DISPLAY highscore
@@ -233,9 +238,10 @@ DECLARE FUNCTION TestLetter WITH the VARIABLE of SelectedLetter
         SET OldArray to ARRAY leaderboards
         CALL UpdateScore with VARIABLE PushScore
         SET Running to 0
+        SET win to 1
         DISPLAY Category selector
         REMOVE Category label
-        DISPLAY button with the class button, the ID ReplayButton and make it CALL SetUp when clicked, have it labeled CONTINUE, put in place of the life counter
+        DISPLAY button with the class button, the ID ReplayButton and make it CALL SetUp when clicked, have it labeled "YOU WIN! Press to continue", put in place of the life counter
     ENDIF
 ENDFUNCTION
 

@@ -1,40 +1,40 @@
-.TitleBar {
-    font-size: 30px;
-    text-align: center;
-    font-family: 'Merriweather', serif;
-    margin: 2px;
+.TitleBar {/* Sets style for title */
+    font-size: 30px; /* Sets font size */
+    text-align: center; /* Aligns text to center */
+    font-family: 'Merriweather', serif; /* Sets font to Merriweather */
+    margin: 2px; /* Adds a margin */
 }
 
-#button {  
-    background-color: #4ca0af; /* Blue */
-    border: none;
-    color: white;
-    padding: 0.9vw 0.9vw;
-    display: inline-block;
-    font-size: 2.5vw;
-    outline: none;
-    margin: 2px;
+#button { /* Styles keyboard */  
+    background-color: #4ca0af; /* Sets background colour to blue */
+    border: none; /* Removes button border */
+    color: white; /* Sets text colour to white */
+    padding: 0.9vw 0.9vw; /* Sets padding to make the button bigger */
+    display: inline-block; /* Sets display type */
+    font-size: 2.5vw; /* Sets font size */
+    outline: none; /* Removes selection box */
+    margin: 2px; /* Sets margin, spaces everything out */
 }
 
 
-.button {  
-    background-color: #4ca0af; /* Blues */
-    border: none;
-    color: white;
-    display: inline-block;
-    font-size: 25px;
-    outline: none;
-    margin-bottom: 10px;
-    margin-top: 10px;
+.button {  /* Styles try again and continue buttons */
+    background-color: #4ca0af; /* Sets background colour to blue */
+    border: none; /* Removes button border */
+    color: white; /* Sets text colour to white */
+    display: inline-block; /* Sets display type */
+    font-size: 25px; /* Sets font size */
+    outline: none; /* Removes selection box */
+    margin-bottom: 10px; /* Sets margin for the top, spaces everything out */
+    margin-top: 10px; /* Sets margin for the bottom, spaces everything out */
 }
 
-#Letters {
-    text-align: center;
-    font-size: 50px;
-    padding-bottom: 35px;
+#Letters { /* Styles the underscores and the hangman word */
+    text-align: center; /* Aligns text */
+    font-size: 50px; /* Sets font size */
+    padding-bottom: 35px; /* Sets padding, spaces everything out */
 }
 
-.hangman, #button, .TitleBar, #Letters, #NoSelect {
+.hangman, #button, .TitleBar, #Letters, #NoSelect { /* Disables user selection, allows for better playing of the game */
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -47,32 +47,35 @@
 
 
 
-.hangman {
-    display: block;
-    width: 20vw;
-    border-style: solid;
-    padding: 12px;
-    margin-left: auto;
+.hangman { /* Styles hangman image */
+    display: block; /* Sets display type */
+    width: 20vw; /* Sets size of the image */
+    border-style: solid; /* Puts a border around the image */
+    padding: 12px; /* Spaces the border out between the image */
+
+    /* Centers the image */
+    margin-left: auto; 
     margin-right: auto;
 }
 
 
 
-.center{
-    text-align: center;
+.center{ /* Centers everything with this class */
+    text-align: center; /* Centers text */
+    /* Centers everything else */
     margin-left: auto;
     margin-right: auto;
 }
 
 
-.centerLabel{
-    display: block;
-    text-align: center;
+.centerLabel{/* Center CSS for the category label */
+    display: block; /* Sets display type */
+    text-align: center; /* Aligns it */
 }
-.FontSize {
-    font-size: 25px;
+.FontSize { /* Changes font size of everything with this class */
+    font-size: 25px; /* Changes the font size */
 }
 
-#LifeCounter, #score, #DisplayCategory  {
-    margin: 0px;
+#LifeCounter, #score, #DisplayCategory  {/* Removes the spacing of the LifeCounter, score, and DisplayCategory html elements */
+    margin: 0px; /* Removes the margin */
 }
